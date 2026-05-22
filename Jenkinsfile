@@ -44,7 +44,7 @@ pipeline {
                 bat 'docker stop %TEST_CONTAINER% || exit /b 0'
                 bat 'docker rm %TEST_CONTAINER% || exit /b 0'
                 bat 'docker run -d -p %APP_PORT%:3000 --name %TEST_CONTAINER% %APP_NAME%:%BUILD_NUMBER%'
-                bat 'timeout /t 5 /nobreak'
+                bat 'ping 127.0.0.1 -n 6 > nul'
                 bat 'curl.exe -f http://localhost:%APP_PORT%/health'
             }
         }
